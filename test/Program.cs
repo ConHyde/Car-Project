@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 namespace test
 {
@@ -8,26 +9,63 @@ namespace test
     {
         static void Main(string[] args)
         {
-             Car fordFiesta = new Car("Ford Fiesta", 4, 100, 40, 8.0, true, 15.5, 3, true);
-             Car fordMondeo = new Car("Ford Mondeo", 4, 110, 50, 7.5, true, 13.5, 5, true);
-             Car fordRanger = new Car("Ford Ranger", 6, 95, 0, 11, true, 0, 4, false);
+            var menuSelected = InitialiseMenu();
 
-            var allCars = new List<Car>();
+            Car fordFiesta = new Car("Ford Fiesta", 4, 100, 40, 8.0, true, "REGNO", 10000, 12500, 15.5, 3, true);
+            Car fordMondeo = new Car("Ford Mondeo", 4, 110, 50, 7.5, true, "REGNO", 10000, 15000, 13.5, 5, true);
+            Car fordRanger = new Car("Ford Ranger", 6, 95, 0, 11, true, "REGNO", 10000, 20000, 0, 4, false);
 
-            allCars.Add(fordFiesta);
-            allCars.Add(fordMondeo);
-            allCars.Add(fordRanger);
+            var cars = new List<Car>();
 
-            //SpeedCamera(allCars, 40);
+            cars.Add(fordFiesta);
+            cars.Add(fordMondeo);
+            cars.Add(fordRanger);
 
-            var raceCars = new List<Car>();
-
-            raceCars.Add(fordFiesta);
-            raceCars.Add(fordMondeo);
-            raceCars.Add(fordRanger);
-
-            Race(raceCars);
+            //SpeedCamera(cars, 40);
+            //Race(cars);
         }
+
+        public static int InitialiseMenu()
+        {
+            bool menuChosen = false;
+            int option = 0;
+
+            while (!menuChosen)
+            {
+
+                Console.WriteLine("Welcome to the car application!");
+                Console.WriteLine("Please type the number for the option you require!");
+
+                Console.WriteLine("1. Car Valuation");
+                if (Int32.TryParse(Console.ReadLine(), out int result))
+                {
+                    option = result;
+                    menuChosen = true;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid Menu number!");
+                }
+            }
+            return option;
+        }
+
+        public static void InitialiseValuation()
+        {
+            Car carValue = new Car();
+
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Welcome to your free car valuation!");
+
+            Console.WriteLine("Please enter your registration!");
+            carValue.Registration = Console.ReadLine();
+
+            Console.WriteLine("Please enter your Mileage!");
+            carValue.Mileage = Int32.Parse(Console.ReadLine());
+
+            HttpClient client = new HttpClient();
+        }
+
 
         public static void PrepareCars(List<Car> cars)
         {
@@ -36,7 +74,6 @@ namespace test
                 car.UpdateReadyToMove();
             }
         }
-
 
         public static void Race(List<Car> cars)
         {
@@ -119,14 +156,19 @@ namespace test
 
     public sealed class Car : Vehicle
     {
-        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty, bool readyToMove)
-                : base(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove)
+
+        public Car() { }
+
+        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty,
+                        bool readyToMove, string registration, int mileage, double value)
+                : base(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value)
         {
           
         }
 
-        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty, bool readyToMove, double spoilerHeight, int doors, bool doorsClosed)
-                : this(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove)
+        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty, bool readyToMove,
+                            string registration, int mileage, double value, double spoilerHeight, int doors, bool doorsClosed)
+                : this(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value)
         {
             SpoilerHeight = spoilerHeight;
             Doors = doors;
@@ -134,7 +176,6 @@ namespace test
 
             UpdateReadyToMove();
         }
-
 
         public double SpoilerHeight { get; set; }
         public double Doors { get; set; }
@@ -158,14 +199,20 @@ namespace test
 
     public abstract class Vehicle
     {
-        public String Make { get; set; }
+        public string Make { get; set; }
         public Int64 Wheels { get; set; }
         public double TopSpeed { get; set; }
         public double CurrentSpeed { get; set; }
         public double TimeToSixty { get; set; }
         public bool ReadyToMove { get; set; }
+        public string Registration {get; set;}
+        public int Mileage { get; set; }
+        public double Value { get; set; }
 
-        public Vehicle(string make, int wheels, double topspeed, double currentSpeed, double timeToSixty, bool readyToMove)
+        public Vehicle() { }
+
+        public Vehicle(string make, int wheels, double topspeed, double currentSpeed,
+                        double timeToSixty, bool readyToMove, string registration, int mileage, double value)
         {
             Make = make;
             Wheels = wheels;
@@ -173,8 +220,19 @@ namespace test
             CurrentSpeed = currentSpeed;
             TimeToSixty = timeToSixty;
             ReadyToMove = readyToMove;
+            Registration = registration;
+            Mileage = mileage;
+            Value = value;
+
 
         }
+        // Overload Constructor To Just Get Valuation
+        public Vehicle(string registration, int mileage)
+        {
+            Registration = registration;
+            Mileage = mileage;
+        }
+
 
         public bool IsSpeeding(double speed, double speedLimit)
         {
@@ -200,6 +258,6 @@ namespace test
         }
 
         public abstract void UpdateReadyToMove();
-
     }
 }
+ 

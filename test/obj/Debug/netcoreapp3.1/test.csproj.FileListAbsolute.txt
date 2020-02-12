@@ -9,3 +9,14 @@
 /Users/connorhyde/Projects/test/test/obj/Debug/netcoreapp3.1/test.AssemblyInfo.cs
 /Users/connorhyde/Projects/test/test/obj/Debug/netcoreapp3.1/test.dll
 /Users/connorhyde/Projects/test/test/obj/Debug/netcoreapp3.1/test.pdb
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test.deps.json
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test.runtimeconfig.json
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test.runtimeconfig.dev.json
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test.dll
+/Users/connorhyde/Projects/Car-Project/test/bin/Debug/netcoreapp3.1/test.pdb
+/Users/connorhyde/Projects/Car-Project/test/obj/Debug/netcoreapp3.1/test.csprojAssemblyReference.cache
+/Users/connorhyde/Projects/Car-Project/test/obj/Debug/netcoreapp3.1/test.AssemblyInfoInputs.cache
+/Users/connorhyde/Projects/Car-Project/test/obj/Debug/netcoreapp3.1/test.AssemblyInfo.cs
+/Users/connorhyde/Projects/Car-Project/test/obj/Debug/netcoreapp3.1/test.dll
+/Users/connorhyde/Projects/Car-Project/test/obj/Debug/netcoreapp3.1/test.pdb
