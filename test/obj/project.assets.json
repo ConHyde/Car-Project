@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/connorhyde/Projects/test/test/test.csproj",
+      "projectUniqueName": "/Users/connorhyde/Projects/Car-Project/test/test.csproj",
       "projectName": "test",
-      "projectPath": "/Users/connorhyde/Projects/test/test/test.csproj",
+      "projectPath": "/Users/connorhyde/Projects/Car-Project/test/test.csproj",
       "packagesPath": "/Users/connorhyde/.nuget/packages/",
-      "outputPath": "/Users/connorhyde/Projects/test/test/obj/",
+      "outputPath": "/Users/connorhyde/Projects/Car-Project/test/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
