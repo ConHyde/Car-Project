@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace test
 {
@@ -10,6 +11,13 @@ namespace test
         static void Main(string[] args)
         {
             var menuSelected = InitialiseMenu();
+
+            switch(menuSelected)
+            {
+                case 1 : InitialiseValuation();
+                    break;
+            }
+
 
             Car fordFiesta = new Car("Ford Fiesta", 4, 100, 40, 8.0, true, "REGNO", 10000, 12500, 15.5, 3, true);
             Car fordMondeo = new Car("Ford Mondeo", 4, 110, 50, 7.5, true, "REGNO", 10000, 15000, 13.5, 5, true);
@@ -30,13 +38,13 @@ namespace test
             bool menuChosen = false;
             int option = 0;
 
+            Console.WriteLine("Welcome to the car application!");
+            Console.WriteLine("Please type the number for the option you require!");
+
+            Console.WriteLine("1. Car Valuation");
+
             while (!menuChosen)
             {
-
-                Console.WriteLine("Welcome to the car application!");
-                Console.WriteLine("Please type the number for the option you require!");
-
-                Console.WriteLine("1. Car Valuation");
                 if (Int32.TryParse(Console.ReadLine(), out int result))
                 {
                     option = result;
@@ -52,18 +60,16 @@ namespace test
 
         public static void InitialiseValuation()
         {
-            Car carValue = new Car();
+            Car car = new Car();
 
             Console.WriteLine("------------------------");
             Console.WriteLine("Welcome to your free car valuation!");
 
             Console.WriteLine("Please enter your registration!");
-            carValue.Registration = Console.ReadLine();
+            car.Registration = Console.ReadLine();
 
             Console.WriteLine("Please enter your Mileage!");
-            carValue.Mileage = Int32.Parse(Console.ReadLine());
-
-            HttpClient client = new HttpClient();
+            car.Mileage = Int32.Parse(Console.ReadLine());
         }
 
 
