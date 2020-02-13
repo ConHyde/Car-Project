@@ -12,16 +12,11 @@ namespace test
         {
             var menuSelected = InitialiseMenu();
 
-            switch(menuSelected)
-            {
-                case 1 : InitialiseValuation();
-                    break;
-            }
+            OpenMenu(menuSelected);
 
-
-            Car fordFiesta = new Car("Ford Fiesta", 4, 100, 40, 8.0, true, "REGNO", 10000, 12500, 15.5, 3, true);
-            Car fordMondeo = new Car("Ford Mondeo", 4, 110, 50, 7.5, true, "REGNO", 10000, 15000, 13.5, 5, true);
-            Car fordRanger = new Car("Ford Ranger", 6, 95, 0, 11, true, "REGNO", 10000, 20000, 0, 4, false);
+            Car fordFiesta = new Car("Ford Fiesta", 4, 100, 40, 8.0, true, "REGNO", 10000, 12500,"White", 15.5, 3, true);
+            Car fordMondeo = new Car("Ford Mondeo", 4, 110, 50, 7.5, true, "REGNO", 10000, 15000, "Blue", 13.5, 5, true);
+            Car fordRanger = new Car("Ford Ranger", 6, 95, 0, 11, true, "REGNO", 10000, 20000, "Black", 0, 4, false);
 
             var cars = new List<Car>();
 
@@ -38,31 +33,58 @@ namespace test
             bool menuChosen = false;
             int option = 0;
 
-            Console.WriteLine("Welcome to the car application!");
+            ClearConsole();
             Console.WriteLine("Please type the number for the option you require!");
 
-            Console.WriteLine("1. Car Valuation");
+            Dictionary<int, string> optionsDic = new Dictionary<int, string>();
+
+            optionsDic.Add(1, "Car Valuation");
+            optionsDic.Add(2, "Car Builder");
+
+            foreach (KeyValuePair<int, string> kvp in optionsDic)
+            {
+                //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                Console.WriteLine("{0}. {1}", kvp.Key, kvp.Value);
+            }
 
             while (!menuChosen)
             {
-                if (Int32.TryParse(Console.ReadLine(), out int result))
+
+                if (Int32.TryParse(Console.ReadLine(), out int result) && optionsDic.ContainsKey(result))
                 {
                     option = result;
                     menuChosen = true;
                 }
                 else
                 {
-                    Console.WriteLine("Please enter a valid Menu number!");
+                    Console.WriteLine("Please enter a valid menu number!");
                 }
             }
             return option;
         }
 
+        public static void OpenMenu(int choice)
+        {
+            switch (choice)
+            {
+                case 1:
+                    InitialiseValuation();
+                    break;
+                case 2:
+                    InitialiseCarBuilder();
+                    break;
+                default:
+                    ClearConsole(); InitialiseMenu();
+                    break;
+            }
+        }
+
+
         public static void InitialiseValuation()
         {
             Car car = new Car();
 
-            Console.WriteLine("------------------------");
+            ClearConsole();
             Console.WriteLine("Welcome to your free car valuation!");
 
             Console.WriteLine("Please enter your registration!");
@@ -72,6 +94,11 @@ namespace test
             car.Mileage = Int32.Parse(Console.ReadLine());
         }
 
+        public static void InitialiseCarBuilder()
+        {
+            Car car = new Car();
+        }
+
 
         public static void PrepareCars(List<Car> cars)
         {
@@ -79,6 +106,15 @@ namespace test
             {
                 car.UpdateReadyToMove();
             }
+        }
+
+        public static void ClearConsole()
+        {
+            Console.Clear();
+
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("       The Car Project!");
+            Console.WriteLine("------------------------------");
         }
 
         public static void Race(List<Car> cars)
@@ -166,15 +202,15 @@ namespace test
         public Car() { }
 
         public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty,
-                        bool readyToMove, string registration, int mileage, double value)
-                : base(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value)
+                        bool readyToMove, string registration, int mileage, double value, string colour)
+                : base(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value, colour)
         {
           
         }
 
         public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty, bool readyToMove,
-                            string registration, int mileage, double value, double spoilerHeight, int doors, bool doorsClosed)
-                : this(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value)
+                            string registration, int mileage, double value, string colour, double spoilerHeight, int doors, bool doorsClosed)
+                : this(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value, colour)
         {
             SpoilerHeight = spoilerHeight;
             Doors = doors;
@@ -214,11 +250,12 @@ namespace test
         public string Registration {get; set;}
         public int Mileage { get; set; }
         public double Value { get; set; }
+        public string Colour { get; set; }
 
         public Vehicle() { }
 
         public Vehicle(string make, int wheels, double topspeed, double currentSpeed,
-                        double timeToSixty, bool readyToMove, string registration, int mileage, double value)
+                        double timeToSixty, bool readyToMove, string registration, int mileage, double value, string colour)
         {
             Make = make;
             Wheels = wheels;
@@ -229,6 +266,7 @@ namespace test
             Registration = registration;
             Mileage = mileage;
             Value = value;
+            Colour = colour;
 
 
         }
