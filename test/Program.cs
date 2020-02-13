@@ -43,7 +43,6 @@ namespace test
 
             foreach (KeyValuePair<int, string> kvp in optionsDic)
             {
-                //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
                 Console.WriteLine("{0}. {1}", kvp.Key, kvp.Value);
             }
 
