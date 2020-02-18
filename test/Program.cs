@@ -43,12 +43,12 @@ namespace test
 
             foreach (KeyValuePair<int, string> kvp in optionsDic)
             {
+                
                 Console.WriteLine("{0}. {1}", kvp.Key, kvp.Value);
             }
 
             while (!menuChosen)
             {
-
                 if (Int32.TryParse(Console.ReadLine(), out int result) && optionsDic.ContainsKey(result))
                 {
                     option = result;
@@ -207,8 +207,9 @@ namespace test
           
         }
 
-        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty, bool readyToMove,
-                            string registration, int mileage, double value, string colour, double spoilerHeight, int doors, bool doorsClosed)
+        public Car(string make, int wheels, double topSpeed, double currentSpeed, double timeToSixty,
+                        bool readyToMove,   string registration, int mileage, double value, string colour,
+                            double spoilerHeight, int doors, bool doorsClosed)
                 : this(make, wheels, topSpeed, currentSpeed, timeToSixty, readyToMove, registration, mileage, value, colour)
         {
             SpoilerHeight = spoilerHeight;
@@ -254,7 +255,8 @@ namespace test
         public Vehicle() { }
 
         public Vehicle(string make, int wheels, double topspeed, double currentSpeed,
-                        double timeToSixty, bool readyToMove, string registration, int mileage, double value, string colour)
+                            double timeToSixty, bool readyToMove, string registration, int mileage,
+                                double value, string colour)
         {
             Make = make;
             Wheels = wheels;
